@@ -1,0 +1,13 @@
+services:
+    spring-boot:
+        container_name: spring-boot
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                - MAVEN_COMMAND=mvnw clean package -DskipTests -Pproduction
+        ports:
+            - "8080:8080"
+        volumes:
+            - ./target:/app/target
+        command: [ "java", "-jar", "app.jar" ]
